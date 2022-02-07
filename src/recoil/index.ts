@@ -20,11 +20,14 @@ export const selectedMenusState = selector({
     get: ({get}) => {
         const selectedMenuIds = get(selectedMenuInfoState);
         const allMenus = get(menusState);
-        const selectedMenus = selectedMenuIds.map((v) => {
+        const selectedMenus = [] as (MenuType & { amount: number }) []
+        selectedMenuIds.forEach((v) => {
             const menuData = allMenus.find((vv) => v.menuId === vv.id)
-            return {
-                ...menuData,
-                amount: v.amount,
+            if(menuData) {
+                selectedMenus.push({
+                    ...menuData,
+                    amount: v.amount,
+                })
             }
         })
 

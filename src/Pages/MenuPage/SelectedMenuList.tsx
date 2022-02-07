@@ -24,7 +24,7 @@ const SelectedMenuList = () => {
     const setSelectedMenuAmount = (menuId: string, amount: number) => {
         if(amount < 0) return;
         setSelectedMenuInfos(selectedMenuInfos.map((v) => {
-            if(v.menuId === menuId) return { ...v, amount: v.amount + 1}
+            if(v.menuId === menuId) return { ...v, amount }
             return v;
         }))
     }
@@ -33,12 +33,9 @@ const SelectedMenuList = () => {
         <Wrapper>
             {selectedMenus?.map((v) => (
                 <h3>
-                    {/* @ts-ignore */}
                     <button onClick={() => setSelectedMenuAmount(v.id, v.amount - 1)}>-</button>
                     {v.name}({v.amount})
-                    {/* @ts-ignore */}
                     <button onClick={() => setSelectedMenuAmount(v.id, v.amount + 1)}>+</button>
-                    {/* @ts-ignore */}
                     <button onClick={() => deleteSelectedMenu(v.id)}>X</button>
                 </h3>
             ))}
