@@ -5,6 +5,7 @@ import {
 } from 'recoil';
 import MenuPage from "./Pages/MenuPage";
 import CouponPage from "./Pages/CouponPage";
+import PaymentMethodPage from "./Pages/PaymentMethodPage";
 import PaymentPage from "./Pages/PaymentPage";
 import './App.css'
 
@@ -16,8 +17,8 @@ function App() {
             <Routes>
                 <Route path='/' element={<MenuPage />}/>
               <Route path='/coupons' element={<CouponPage />}/>
-              <Route path='/payment' element={<PaymentPage />}/>
-              <Route path='/onPayment' element={<PaymentPage />}/>
+                <Route path='/paymentMethod' element={<PaymentMethodPage />}/>
+                <Route path='/payment' element={<PaymentPage />}/>
           </Routes>
         </BrowserRouter>
       </Suspense>

@@ -59,10 +59,6 @@ export const paymentMethodsState = selector<PaymentMethodType[]>({
         const { data } = await getPaymentMethods()
         return data;
     },
-    set: ({get, set}) => {
-        const paymentMethods = get(paymentMethodsState)
-        if(paymentMethods.length > 0) set(selectedPaymentMethodState, paymentMethods[0])
-    }
 })
 
 

@@ -44,7 +44,7 @@ const coupons = [
     }
 ]
 
-export const paymentMethods = [
+const paymentMethods = [
     {
         id: '1',
         name: 'credit-card',
@@ -62,4 +62,5 @@ export const paymentMethods = [
 module.exports = {
     menus,
     coupons,
+    paymentMethods,
 }

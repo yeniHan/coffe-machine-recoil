@@ -5,6 +5,7 @@ import Menu from './Menu';
 import styled from "styled-components";
 import SelectedMenuList from "./SelectedMenuList";
 import NextButton from "../../Components/NextButton";
+import BackButton from "../../Components/Backbutton";
 
 const Wrapper = styled.div`
   padding: 30px;
@@ -29,6 +30,7 @@ const MenuPage = () => {
                 </MenuList>
             <SelectedMenuList />
             <NextButton path="/coupons" />
+            <BackButton />
         </Wrapper>
     )
 }

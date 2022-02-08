@@ -4,6 +4,7 @@ import {useRecoilValue, useRecoilState} from "recoil";
 import {couponsState, paymentState, selectedCouponState} from "../../recoil";
 import getCurrencyStr from "../../utills/getCurrencyStr";
 import NextButton from "../../Components/NextButton";
+import BackButton from "../../Components/Backbutton";
 
 
 const Wrapper = styled.div`
@@ -50,7 +51,8 @@ const CouponPage = () => {
                 })}
                 </CouponList>
             <h3>총 {getCurrencyStr(payment.totalPrice)}원</h3>
-            <NextButton path='/payment' />
+            <NextButton path='/paymentMethod' />
+            <BackButton />
         </Wrapper>
     )
 }

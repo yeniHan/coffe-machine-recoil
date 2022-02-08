@@ -16,6 +16,17 @@ const Wrapper = styled.div`
   height: 240px;
 `;
 
+const SelectedList = styled.div`
+  overflow-y: scroll;
+  height: 138px;
+  overflow-y: scroll;
+  display: flex;
+  flex-wrap: wrap;
+`
+
+const SelectedMenu = styled.h3`
+  width: calc(50% - 60px);
+`
 const XButton = styled.button`
     margin-left: 5px;
 `;
@@ -37,14 +48,16 @@ const SelectedMenuList = () => {
 
     return (
         <Wrapper>
+            <SelectedList>
             {selectedMenus?.map((v) => (
-                <h3>
+                <SelectedMenu>
                     <button onClick={() => setSelectedMenuAmount(v.id, v.amount - 1)}>-</button>
                     {v.name}({v.amount})
                     <button onClick={() => setSelectedMenuAmount(v.id, v.amount + 1)}>+</button>
                     <XButton onClick={() => deleteSelectedMenu(v.id)}>X</XButton>
-                </h3>
+                </SelectedMenu>
             ))}
+            </SelectedList>
             <h3>총 {getCurrencyStr(payment.totalPrice)}원</h3>
         </Wrapper>
     )
