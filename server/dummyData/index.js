@@ -29,18 +29,33 @@ const menus = [
 const coupons = [
     {
         id:'1',
-        name: '5%',
+        name: '5% 할인 쿠폰',
         discountRate: 0.05
     },
     {
         id: '2',
-        name: '7%',
+        name: '7% 할인 쿠폰',
         discountRate: 0.07
     },
     {
         id: '3',
-        name: '10%',
+        name: '10% 할인 쿠폰',
         discountRate: 0.1
+    }
+]
+
+export const paymentMethods = [
+    {
+        id: '1',
+        name: 'credit-card',
+        text: '신용 카드',
+        discountRate: 0
+    },
+    {
+        id: '2',
+        name: 'cash',
+        text: '현금',
+        discountRate: 0.05
     }
 ]
 

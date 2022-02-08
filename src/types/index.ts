@@ -16,12 +16,17 @@ export type CouponType = {
     discountRate: number;
 }
 
-export type PaymentMethod = 'cash' | 'credit-card'
+export type PaymentMethodType = {
+    id: string;
+    name: string;
+    text: string;
+    discountRate: number;
+}
 
-export type Payment = {
+export type PaymentType = {
     user: string;
     totalPrice: number;
-    menus: MenuType[],
-    selectedCoupon: CouponType[],
-    paymentMethod: PaymentMethod,
+    menus: string[];
+    selectedCoupon?: string;
+    paymentMethod?: string;
 }

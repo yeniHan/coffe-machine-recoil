@@ -1,17 +1,19 @@
 import Axios from './Axios';
-import {MenuType, Payment} from "../types";
+import {MenuType, PaymentType} from "../types";
 import {AxiosResponse} from "axios";
 
 export const getCoupons = async () => {
-   const { data }  = await Axios.get('/coupons')
-    return data;
+   return await Axios.get('/coupons')
 }
 
 export const getMenus = () => {
     return Axios.get('/menus');
 }
 
-export const postPayment = async(payment: Payment) => {
-    const { data }  = await  Axios.post('/payment', payment)
-    return data;
+export const getPaymentMethods = () => {
+    return Axios.get('/paymentMethods');
+}
+
+export const postPayment = async(payment: PaymentType) => {
+    return await  Axios.post('/payment', payment)
 }

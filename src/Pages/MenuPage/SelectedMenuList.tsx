@@ -1,8 +1,9 @@
 import React from 'react';
-import { selectedMenuInfoState, selectedMenusState} from "../../recoil";
+import {paymentState, selectedMenuInfoState, selectedMenusState} from "../../recoil";
 import {useRecoilState, useRecoilValue} from 'recoil'
 import styled from "styled-components";
 import useAddDeleteSelectedMenu from "./hooks/useAddDeleteSelectedMenu";
+import getCurrencyStr from "../../utills/getCurrencyStr";
 
 
 const Wrapper = styled.div`
@@ -15,14 +16,19 @@ const Wrapper = styled.div`
   height: 240px;
 `;
 
+const XButton = styled.button`
+    margin-left: 5px;
+`;
+
 
 const SelectedMenuList = () => {
     const selectedMenus = useRecoilValue(selectedMenusState)
+    const payment = useRecoilValue(paymentState)
     const [selectedMenuInfos, setSelectedMenuInfos] = useRecoilState(selectedMenuInfoState)
     const { deleteSelectedMenu } = useAddDeleteSelectedMenu()
 
     const setSelectedMenuAmount = (menuId: string, amount: number) => {
-        if(amount < 0) return;
+        if(amount <= 0) return;
         setSelectedMenuInfos(selectedMenuInfos.map((v) => {
             if(v.menuId === menuId) return { ...v, amount }
             return v;
@@ -36,9 +42,10 @@ const SelectedMenuList = () => {
                     <button onClick={() => setSelectedMenuAmount(v.id, v.amount - 1)}>-</button>
                     {v.name}({v.amount})
                     <button onClick={() => setSelectedMenuAmount(v.id, v.amount + 1)}>+</button>
-                    <button onClick={() => deleteSelectedMenu(v.id)}>X</button>
+                    <XButton onClick={() => deleteSelectedMenu(v.id)}>X</XButton>
                 </h3>
             ))}
+            <h3>총 {getCurrencyStr(payment.totalPrice)}원</h3>
         </Wrapper>
     )
 }

@@ -4,6 +4,7 @@ import {
     RecoilRoot,
 } from 'recoil';
 import MenuPage from "./Pages/MenuPage";
+import CouponPage from "./Pages/CouponPage";
 import PaymentPage from "./Pages/PaymentPage";
 import './App.css'
 
@@ -14,7 +15,7 @@ function App() {
           <BrowserRouter>
             <Routes>
                 <Route path='/' element={<MenuPage />}/>
-              <Route path='/coupons' element={<MenuPage />}/>
+              <Route path='/coupons' element={<CouponPage />}/>
               <Route path='/payment' element={<PaymentPage />}/>
               <Route path='/onPayment' element={<PaymentPage />}/>
           </Routes>

@@ -1,9 +1,8 @@
 import React, {useEffect} from 'react';
 import {MenuType} from "../../types";
 import styled from 'styled-components';
-import {useSetRecoilState} from "recoil";
-import {selectedMenuInfoState} from "../../recoil";
 import useAddDeleteMenuMethods from "./hooks/useAddDeleteSelectedMenu";
+import getCurrencyStr from "../../utills/getCurrencyStr";
 
 
 const Wrapper = styled.div`
@@ -22,12 +21,12 @@ const Wrapper = styled.div`
 
 
 const Menu = ({ menu }: { menu: MenuType}) => {
-    const setSelectedMenuInfoState = useSetRecoilState(selectedMenuInfoState)
     const {addSelectedMenu} = useAddDeleteMenuMethods()
 
     return (
         <Wrapper onClick={() => addSelectedMenu(menu.id)}>
             <h2>{menu.name}</h2>
+            <h3>{getCurrencyStr(menu.price)}</h3>
         </Wrapper>
     )
 }
