@@ -1,6 +1,6 @@
 import React from 'react';
 import {useRecoilState, useRecoilValue} from "recoil";
-import {paymentMethodsState, paymentState, selectedPaymentMethodState} from "../../recoil";
+import {paymentMethodsState, selectedPaymentMethodState} from "../../recoil";
 import NextButton from "../../Components/NextButton";
 import styled from "styled-components";
 import BackButton from "../../Components/Backbutton";

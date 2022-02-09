@@ -9,6 +9,8 @@ import getCurrencyStr from "../../utills/getCurrencyStr";
 import BackButton from "../../Components/Backbutton";
 import {postPayment} from "../../apiCalls";
 import {Spinner} from "../../Components/LoadingPage";
+import useResetAllSelectedStates from "../PaymentMethodPage/useResetAllSelectedStates";
+import {useNavigate} from "react-router-dom";
 
 
 const Wrapper = styled.div`
@@ -39,6 +41,8 @@ const PaymentPage = () => {
     const selectedCoupon = useRecoilValue(selectedCouponState)
     const selectedMenus = useRecoilValue(selectedMenusState)
     const [isOnProcess, setIsOnProcess] = useState(true);
+    const resetAllSelectedStates = useResetAllSelectedStates()
+    const navigator = useNavigate()
 
     useEffect(() => {
         const id = setTimeout(() => {
@@ -57,7 +61,8 @@ const PaymentPage = () => {
         if(!isOnProcess) {
             id = setTimeout(() => {
                 // recoil state 전부 reset 필요
-                window.location.href = '/'
+                resetAllSelectedStates()
+                navigator('/')
             }, 3000)
         }
         return () => {
