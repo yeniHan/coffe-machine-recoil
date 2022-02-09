@@ -1,16 +1,15 @@
-import React, {useEffect, Suspense } from 'react';
-import {menusState, paymentState} from "../../recoil";
-import { useRecoilValue } from 'recoil'
+import React from 'react';
+import {menusState, selectedMenuInfoState} from "../../recoil";
+import {useRecoilValue} from 'recoil'
 import Menu from './Menu';
 import styled from "styled-components";
-import SelectedMenuList from "./SelectedMenuList";
+import SelectedMenuList from "../../Components/SelectedMenuList";
 import NextButton from "../../Components/NextButton";
-import BackButton from "../../Components/Backbutton";
 
 const Wrapper = styled.div`
   padding: 30px;
   overflow-y: scroll;
-  height: calc(100vh - 360px);
+  height: calc(100vh - 367px);
 `;
 
 const MenuList = styled.div`
@@ -21,6 +20,7 @@ const MenuList = styled.div`
 
 const MenuPage = () => {
     const menus = useRecoilValue(menusState)
+    const isSelectedMenuInfoExist = useRecoilValue(selectedMenuInfoState)?.length > 0
 
     return (
         <Wrapper>
@@ -29,8 +29,7 @@ const MenuPage = () => {
                     {menus?.map((v) => <Menu key={v.id} menu={v} />)}
                 </MenuList>
             <SelectedMenuList />
-            <NextButton path="/coupons" />
-            <BackButton />
+            {isSelectedMenuInfoExist && <NextButton path="/coupons" />}
         </Wrapper>
     )
 }

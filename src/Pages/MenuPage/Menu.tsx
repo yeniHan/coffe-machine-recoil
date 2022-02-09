@@ -11,6 +11,7 @@ const Wrapper = styled.div`
   border-radius: 5px;
   border: 1px solid black;
   cursor: pointer;
+  padding: 20px;
   
   :hover{
     background-color: gray;
@@ -24,9 +25,9 @@ const Menu = ({ menu }: { menu: MenuType}) => {
     const {addSelectedMenu} = useAddDeleteMenuMethods()
 
     return (
-        <Wrapper onClick={() => addSelectedMenu(menu.id)}>
+        <Wrapper role="menu" onClick={() => addSelectedMenu(menu.id)}>
             <h2>{menu.name}</h2>
-            <h3>{getCurrencyStr(menu.price)}</h3>
+            <h3>{getCurrencyStr(menu.price)}원</h3>
         </Wrapper>
     )
 }

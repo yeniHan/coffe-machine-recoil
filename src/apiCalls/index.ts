@@ -1,6 +1,5 @@
 import Axios from './Axios';
-import {MenuType, PaymentType} from "../types";
-import {AxiosResponse} from "axios";
+import {PaymentType} from "../types";
 
 export const getCoupons = async () => {
    return await Axios.get('/coupons')

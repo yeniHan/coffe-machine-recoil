@@ -1,9 +1,10 @@
 import React from 'react';
-import {paymentState, selectedMenuInfoState, selectedMenusState} from "../../recoil";
+import {paymentState, selectedMenuInfoState, selectedMenusState} from "../recoil";
 import {useRecoilState, useRecoilValue} from 'recoil'
 import styled from "styled-components";
-import useAddDeleteSelectedMenu from "./hooks/useAddDeleteSelectedMenu";
-import getCurrencyStr from "../../utills/getCurrencyStr";
+import useAddDeleteSelectedMenu from "../Pages/MenuPage/hooks/useAddDeleteSelectedMenu";
+import getCurrencyStr from "../utills/getCurrencyStr";
+import {useLocation} from "react-router-dom";
 
 
 const Wrapper = styled.div`
@@ -13,7 +14,7 @@ const Wrapper = styled.div`
   padding: 30px;
   background-color: #c7c7d2;
   width: 100%;
-  height: 240px;
+  height: 247px;
 `;
 
 const SelectedList = styled.div`
@@ -28,8 +29,13 @@ const SelectedMenu = styled.h3`
   width: calc(50% - 60px);
 `
 const XButton = styled.button`
-    margin-left: 5px;
+  margin-left: 5px;
+  ${({notShow}:{notShow: boolean}) => notShow && 'display: none'};
 `;
+
+const Button = styled.button`
+  ${({notShow}:{notShow: boolean}) => notShow && 'display: none'};
+`
 
 
 const SelectedMenuList = () => {
@@ -37,6 +43,7 @@ const SelectedMenuList = () => {
     const payment = useRecoilValue(paymentState)
     const [selectedMenuInfos, setSelectedMenuInfos] = useRecoilState(selectedMenuInfoState)
     const { deleteSelectedMenu } = useAddDeleteSelectedMenu()
+    const isNotMenuPage = useLocation().pathname !== '/'
 
     const setSelectedMenuAmount = (menuId: string, amount: number) => {
         if(amount <= 0) return;
@@ -48,13 +55,13 @@ const SelectedMenuList = () => {
 
     return (
         <Wrapper>
-            <SelectedList>
+            <SelectedList role="selected-menu-list">
             {selectedMenus?.map((v) => (
-                <SelectedMenu>
-                    <button onClick={() => setSelectedMenuAmount(v.id, v.amount - 1)}>-</button>
+                <SelectedMenu key={v.id}>
+                    <Button notShow={isNotMenuPage} onClick={() => setSelectedMenuAmount(v.id, v.amount - 1)}>-</Button>
                     {v.name}({v.amount})
-                    <button onClick={() => setSelectedMenuAmount(v.id, v.amount + 1)}>+</button>
-                    <XButton onClick={() => deleteSelectedMenu(v.id)}>X</XButton>
+                    <Button notShow={isNotMenuPage} onClick={() => setSelectedMenuAmount(v.id, v.amount + 1)}>+</Button>
+                    <XButton notShow={isNotMenuPage} onClick={() => deleteSelectedMenu(v.id)}>X</XButton>
                 </SelectedMenu>
             ))}
             </SelectedList>

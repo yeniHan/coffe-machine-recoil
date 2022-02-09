@@ -8,11 +8,12 @@ import CouponPage from "./Pages/CouponPage";
 import PaymentMethodPage from "./Pages/PaymentMethodPage";
 import PaymentPage from "./Pages/PaymentPage";
 import './App.css'
+import LoadingPage from "./Components/LoadingPage";
 
 function App() {
   return (
       <RecoilRoot>
-          <Suspense fallback={<h1>Loading..</h1>}>
+          <Suspense fallback={<LoadingPage />}>
           <BrowserRouter>
             <Routes>
                 <Route path='/' element={<MenuPage />}/>

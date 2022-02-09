@@ -41,10 +41,7 @@ export const couponsState = selector<CouponType[]>({
         const { data } = await getCoupons()
         return data;
     },
-    set: ({get, set}) => {
-        const coupons = get(couponsState)
-        if(coupons.length > 0) set(selectedCouponState, coupons[0])
-    }
+
 })
 
 export const selectedCouponState = atom<CouponType|null>({
@@ -73,12 +70,19 @@ export const paymentState = selector<PaymentType>({
         const selectedMenus = get(selectedMenusState);
         const selectedCoupon = get(selectedCouponState);
         const selectedPaymentMethod = get(selectedPaymentMethodState);
+        let takoutTotalPrice = 0;
 
-        let totalPrice = selectedMenus.reduce((prev, cur) => {
-             return prev + cur.amount* cur.price
+        let inTotalPrice = selectedMenus.reduce((prev, cur) => {
+            if(cur.isTakeout) {
+                takoutTotalPrice += cur.price * cur.amount
+                return prev;
+            }
+            else return prev + cur.amount* cur.price
         }, 0);
 
-        if(selectedCoupon) totalPrice = totalPrice*(1 - selectedCoupon.discountRate)
+        let totalPrice;
+        if(selectedCoupon) totalPrice = inTotalPrice*(1 - selectedCoupon.discountRate) + takoutTotalPrice;
+        else totalPrice = inTotalPrice + takoutTotalPrice;
         if(selectedPaymentMethod && selectedPaymentMethod.name === 'cash') totalPrice = totalPrice*(1 - selectedPaymentMethod.discountRate)
 
         return {

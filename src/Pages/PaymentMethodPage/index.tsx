@@ -1,15 +1,16 @@
 import React from 'react';
 import {useRecoilState, useRecoilValue} from "recoil";
 import {paymentMethodsState, paymentState, selectedPaymentMethodState} from "../../recoil";
-import getCurrencyStr from "../../utills/getCurrencyStr";
 import NextButton from "../../Components/NextButton";
 import styled from "styled-components";
 import BackButton from "../../Components/Backbutton";
+import SelectedMenuList from "../../Components/SelectedMenuList";
 
 
 const Wrapper = styled.div`
   padding: 30px;
   overflow-y: scroll;
+  height: calc(100vh - 367px);
 `;
 
 const PaymentMethodsList = styled.div`
@@ -24,7 +25,8 @@ const PaymentMethod = styled.div`
   border-radius: 5px;
   border: 1px solid black;
   cursor: pointer;
-  
+  padding: 20px;
+
   ${({ selected }: { selected: boolean }) => selected && `background-color: gray;`}
 `;
 
@@ -32,7 +34,6 @@ const PaymentMethod = styled.div`
 const PaymentMethodPage = () => {
     const paymentMethods = useRecoilValue(paymentMethodsState)
     const [selectedPaymentMethod, setSelectedPaymentMethod] = useRecoilState(selectedPaymentMethodState)
-    const payment = useRecoilValue(paymentState)
 
     return (
         <Wrapper>
@@ -51,8 +52,8 @@ const PaymentMethodPage = () => {
                     )
                 })}
             </PaymentMethodsList>
-            <h3>총 {getCurrencyStr(payment.totalPrice)}원</h3>
-            <NextButton path='/payment' />
+            <SelectedMenuList />
+            {selectedPaymentMethod && <NextButton path='/payment' />}
             <BackButton />
         </Wrapper>
     )

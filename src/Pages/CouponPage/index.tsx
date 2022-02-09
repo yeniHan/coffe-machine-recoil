@@ -2,14 +2,15 @@ import React from 'react';
 import styled from "styled-components";
 import {useRecoilValue, useRecoilState} from "recoil";
 import {couponsState, paymentState, selectedCouponState} from "../../recoil";
-import getCurrencyStr from "../../utills/getCurrencyStr";
 import NextButton from "../../Components/NextButton";
 import BackButton from "../../Components/Backbutton";
+import SelectedMenuList from "../../Components/SelectedMenuList";
 
 
 const Wrapper = styled.div`
   padding: 30px;
   overflow-y: scroll;
+  height: calc(100vh - 367px);
 `;
 
 const CouponList = styled.div`
@@ -24,7 +25,8 @@ const Coupon = styled.div`
   border-radius: 5px;
   border: 1px solid black;
   cursor: pointer;
-  
+  padding: 20px;
+
   ${({ selected }: { selected: boolean }) => selected && `background-color: gray;`}
 `;
 
@@ -50,7 +52,7 @@ const CouponPage = () => {
                     )
                 })}
                 </CouponList>
-            <h3>총 {getCurrencyStr(payment.totalPrice)}원</h3>
+            <SelectedMenuList />
             <NextButton path='/paymentMethod' />
             <BackButton />
         </Wrapper>
