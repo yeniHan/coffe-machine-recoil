@@ -38,13 +38,13 @@ const PaymentPage = () => {
     const payment = useRecoilValue(paymentState)
     const selectedCoupon = useRecoilValue(selectedCouponState)
     const selectedMenus = useRecoilValue(selectedMenusState)
-    const [isLoading, setIsLoading] = useState(true);
+    const [isOnProcess, setIsOnProcess] = useState(true);
 
     useEffect(() => {
         const id = setTimeout(() => {
             postPayment(payment)
                 .then(() => {
-                    setIsLoading(false)
+                    setIsOnProcess(false)
                 })
         }, 5000)
         return () => {
@@ -54,7 +54,7 @@ const PaymentPage = () => {
 
     useEffect(() => {
         let id: ReturnType<typeof setTimeout>;
-        if(!isLoading) {
+        if(!isOnProcess) {
             id = setTimeout(() => {
                 // recoil state 전부 reset 필요
                 window.location.href = '/'
@@ -63,12 +63,12 @@ const PaymentPage = () => {
         return () => {
             if(id) clearTimeout(id)
         }
-    }, [isLoading])
+    }, [isOnProcess])
 
 
     return (
         <Wrapper>
-            <h1>{isLoading ? '선택하신 상품으로 결제가 진행중입니다.' : '결제가 완료되었습니다. 메뉴가 대기중 입니다.'}</h1>
+            <h1>{isOnProcess ? '선택하신 상품으로 결제가 진행중입니다.' : '결제가 완료되었습니다. 메뉴가 대기중 입니다.'}</h1>
             <PaymentInfo>
                 {
                     selectedMenus?.map((v) => (
@@ -79,8 +79,8 @@ const PaymentPage = () => {
                 {selectedCoupon && <h3>선택된 쿠폰: {selectedCoupon.name}</h3>}
                 <h3>총 금액: {getCurrencyStr(payment.totalPrice)}원</h3>
             </PaymentInfo>
-            {isLoading && <Spinner />}
-            {isLoading && <BackButton />}
+            {isOnProcess && <Spinner />}
+            {isOnProcess && <BackButton />}
         </Wrapper>
     )
 }
