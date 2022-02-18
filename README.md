@@ -1,4 +1,4 @@
-# kids-note-assignment
+# Recoil을 사용하여 커피 주문 앱 만들기
 ## 실행 방법
 * ./server/app.js를 실행
 * npm run start
