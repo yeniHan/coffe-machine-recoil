@@ -1,4 +1,5 @@
 # Recoil을 사용하여 커피 주문 앱 만들기
+recoil 실습을 위해 만든 미니 앱입니다.
 ## 실행 방법
 * ./server/app.js를 실행
 * npm run start
